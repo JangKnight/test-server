@@ -1,31 +1,25 @@
 import { useState } from "react";
-import UseStateBasics from "./tutorial/01-useState/starter/02-useState-basics";
-import UseStateWithArrays from "./tutorial/01-useState/starter/03-useState-array";
-import UseEffect from "./tutorial/02-useEffect/starter/01-code-example";
-import FetchData from "./tutorial/02-useEffect/starter/04-fetch-data";
-import AuthData from "./tutorial/02-useEffect/starter/04-auth-data";
-import AuthReg from "./tutorial/02-useEffect/starter/04-auth-reg";
-import Note from "./tutorial/03-conditional-rendering/starter/01-quick-note";
-import FetchProfile from "./tutorial/03-conditional-rendering/starter/02-fetch-profile";
-import FetchAdmin from "./tutorial/03-conditional-rendering/starter/03-admin-rule";
-import Ct from "./components/counting";
-import Arr from "./components/arr";
+import Nav from "./01-header-nav";
+import TodoApp from "./04-01-todo";
+import Note from "./01-quick-note";
+import FetchProfile from "./02-fetch-profile";
+import FetchAdmin from "./03-admin-rule";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
   const [adminRefresh, setAdminRefresh] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="container">
+    <div>
+      <Nav />
       <Note />
-      <hr className="my-10" />
       <FetchProfile />
-      <hr className="my-10" />
-      <h2 className="text-2xl font-bold mb-4">Todo App</h2>
-      <AuthReg onUserCreated={() => setAdminRefresh((c) => c + 1)} />
-      <AuthData setToken={setToken} />
-      <FetchData token={token} />
-      <hr className="my-10" />
+      <TodoApp
+        token={token}
+        setToken={setToken}
+        setAdminRefresh={setAdminRefresh}
+      />
       <FetchAdmin token={token} refreshKey={adminRefresh} />
     </div>
   );

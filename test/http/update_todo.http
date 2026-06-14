@@ -1,9 +1,0 @@
-PUT http://localhost:4040/todos/4
-Content-Type: application/json
-
-{
-    "title": "Updates task",
-    "description": "This is an updated task",
-    "priority": 3,
-    "completed": true
-}

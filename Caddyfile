@@ -1,14 +1,10 @@
-{
-    debug
-}
-
 anthonysjhenry.com, www.anthonysjhenry.com {
 	@blocked {
-		path */.env* /*.env */config* */config.* *.php
+		path *.env* *config*
 	}
 
 	handle @blocked {
-		abort
+		respond 403
 	}
 
 	handle /api/* {
