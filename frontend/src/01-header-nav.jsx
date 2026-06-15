@@ -99,6 +99,18 @@ const Nav = () => {
                   </a>
                 </li>
 
+                <li>
+                  <a
+                    className="text-gray-500 transition hover:text-gray-500/75"
+                    href="https://grafana.anthonysjhenry.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    Grafana{" "}
+                  </a>
+                </li>
+
                 <>
                   <li>
                     <a
