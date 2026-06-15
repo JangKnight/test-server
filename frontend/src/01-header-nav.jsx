@@ -87,6 +87,18 @@ const Nav = () => {
                   </a>
                 </li>
 
+                <li>
+                  <a
+                    className="text-gray-500 transition hover:text-gray-500/75"
+                    href="https://prometheus.anthonysjhenry.com/targets"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    Prometheus{" "}
+                  </a>
+                </li>
+
                 <>
                   <li>
                     <a
