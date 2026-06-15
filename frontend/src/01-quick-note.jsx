@@ -9,7 +9,7 @@ const Note = () => {
       <p className="text-2xl font-bold mb-4">Thanks for dropping by!</p>
       <p>
         This is just my sandbox site where I experiment with different security,
-        typescript, and react concepts using docker and a VPS.
+        development, and deployment concepts using docker and a VPS.
       </p>
       <p>
         You may be interested in my{" "}
