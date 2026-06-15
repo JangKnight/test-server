@@ -63,6 +63,30 @@ const Nav = () => {
                   </a>
                 </li>
 
+                <li>
+                  <a
+                    className="text-gray-500 transition hover:text-gray-500/75"
+                    href="https://rabbitmq.anthonysjhenry.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    RabbitMQ{" "}
+                  </a>
+                </li>
+
+                <li>
+                  <a
+                    className="text-gray-500 transition hover:text-gray-500/75"
+                    href="https://minio.anthonysjhenry.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {" "}
+                    MinIO{" "}
+                  </a>
+                </li>
+
                 <>
                   <li>
                     <a

@@ -4,6 +4,7 @@ from typing import Annotated, Optional
 
 import aio_pika
 from fastapi import Depends, FastAPI, HTTPException
+from prometheus_fastapi_instrumentator import Instrumentator
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.openapi.docs import get_redoc_html, get_swagger_ui_html
@@ -47,6 +48,7 @@ app.include_router(admin.router)
 app.include_router(users.router)
 app.include_router(events.router)
 
+Instrumentator().instrument(app).expose(app, include_in_schema=False)
 
 # -----Configs-----
 origins = [

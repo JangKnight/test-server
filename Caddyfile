@@ -1,3 +1,7 @@
+{
+    admin 0.0.0.0:2019
+}
+
 anthonysjhenry.com, www.anthonysjhenry.com {
 	@blocked {
 		path *.env* *config*
@@ -14,4 +18,20 @@ anthonysjhenry.com, www.anthonysjhenry.com {
 	handle {
 		reverse_proxy client:4444
 	}
+}
+
+rabbitmq.anthonysjhenry.com {
+	reverse_proxy rabbitmq:15672
+}
+
+minio.anthonysjhenry.com {
+	reverse_proxy minio:9001
+}
+
+prometheus.anthonysjhenry.com {
+	reverse_proxy prometheus:9090
+}
+
+grafana.anthonysjhenry.com {
+	reverse_proxy grafana:3000
 }

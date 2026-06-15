@@ -11,6 +11,8 @@ services:
     depends_on:
       - server
       - client
+      - prometheus
+      - grafana
 
   client:
     build:
@@ -65,6 +67,7 @@ services:
       - "15672:15672"
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
+      - ./rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugins:ro
     healthcheck:
       test: ["CMD", "rabbitmq-diagnostics", "ping"]
       interval: 10s
@@ -90,6 +93,8 @@ services:
     restart: always
     env_file:
       - .env
+    environment:
+      MINIO_PROMETHEUS_AUTH_TYPE: "public"
     ports:
       - "9000:9000"
       - "9001:9001"
@@ -102,9 +107,53 @@ services:
       timeout: 5s
       retries: 10
 
+  postgres-exporter:
+    image: prometheuscommunity/postgres-exporter:latest
+    restart: always
+    environment:
+      DATA_SOURCE_NAME: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}?sslmode=disable"
+    depends_on:
+      db:
+        condition: service_healthy
+    expose:
+      - "9187"
+
+  prometheus:
+    image: prom/prometheus:latest
+    restart: always
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    expose:
+      - "9090"
+    depends_on:
+      - server
+      - rabbitmq
+      - minio
+      - postgres-exporter
+
+  grafana:
+    image: grafana/grafana:latest
+    restart: always
+    env_file:
+      - .env
+    environment:
+      GF_SECURITY_ADMIN_USER: "${GRAFANA_ADMIN_USER}"
+      GF_SECURITY_ADMIN_PASSWORD: "${GRAFANA_ADMIN_PASSWORD}"
+      GF_SERVER_ROOT_URL: "https://grafana.anthonysjhenry.com"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
+    expose:
+      - "3000"
+    depends_on:
+      - prometheus
+
 volumes:
   postgres_data:
   caddy_data:
   caddy_config:
   rabbitmq_data:
   minio_data:
+  prometheus_data:
+  grafana_data:
